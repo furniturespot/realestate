@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=3270&q=80">
     
     <script>
         tailwind.config = {
@@ -185,22 +186,49 @@
         .dark-mode .bg-white\/70, .dark-mode .bg-white\/60, .dark-mode .bg-white\/40 { background-color: rgba(39, 39, 42, 0.6) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
     </style>
 </head>
-<body class="font-sans text-textDark antialiased overflow-x-hidden">
+<body class="font-sans text-textDark antialiased overflow-x-hidden" id="top">
 
     <!-- MOBILE MENU OVERLAY -->
-    <div id="mobile-menu" class="fixed inset-0 bg-[#0B0B0B]/95 backdrop-blur-xl z-[200] transform translate-x-full transition-transform duration-500 flex flex-col pt-24 px-8 md:hidden">
+    <div id="mobile-menu" class="fixed inset-0 bg-[#0B0B0B]/95 backdrop-blur-xl z-[600] transform translate-x-full transition-transform duration-150 flex flex-col pt-24 px-8 md:hidden overflow-y-auto pb-12">
         <button id="close-menu-btn" class="absolute top-8 right-8 text-white hover:text-primary transition-colors">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
+        
         <ul class="flex flex-col gap-6 text-xl font-serif text-white">
-            <li><a href="#" class="hover:text-primary transition-colors block">Home</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors block">Dubai Properties</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors block">Abu Dhabi Properties</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors block">Off-Plan Projects</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors block">Luxury Villas</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors block">Contact</a></li>
+            <li><a href="#top" class="hover:text-primary transition-colors block">Home</a></li>
+            
+            <!-- Dubai Dropdown -->
+            <li class="relative">
+                <div class="flex justify-between items-center cursor-pointer hover:text-primary transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+                    <span>Dubai Properties</span>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                </div>
+                <ul class="hidden flex-col pl-4 mt-4 gap-4 text-[16px] font-sans text-gray-300">
+                    <li><span class="block cursor-pointer hover:text-primary transition-colors" data-location-trigger="Dubai Marina" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Dubai Marina</span></li>
+                    <li><span class="block cursor-pointer hover:text-primary transition-colors" data-location-trigger="Downtown Dubai" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Downtown Dubai</span></li>
+                    <li><span class="block cursor-pointer hover:text-primary transition-colors" data-location-trigger="Palm Jumeirah" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Palm Jumeirah</span></li>
+                </ul>
+            </li>
+
+            <!-- Abu Dhabi Dropdown -->
+            <li class="relative">
+                <div class="flex justify-between items-center cursor-pointer hover:text-primary transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+                    <span>Abu Dhabi Properties</span>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                </div>
+                <ul class="hidden flex-col pl-4 mt-4 gap-4 text-[16px] font-sans text-gray-300">
+                    <li><span class="block cursor-pointer hover:text-primary transition-colors" data-location-trigger="Saadiyat Island" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Saadiyat Island</span></li>
+                    <li><span class="block cursor-pointer hover:text-primary transition-colors" data-location-trigger="Yas Island" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Yas Island</span></li>
+                    <li><span class="block cursor-pointer hover:text-primary transition-colors" data-location-trigger="Al Raha Beach" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')">Al Raha Beach</span></li>
+                </ul>
+            </li>
+
+            <li><a href="#dream-place-section" class="hover:text-primary transition-colors block filter-nav-link" data-filter-target="off-plan">Off-Plan Projects</a></li>
+            <li><a href="#dream-place-section" class="hover:text-primary transition-colors block filter-nav-link" data-filter-target="villas">Luxury Villas</a></li>
+            <li><a href="#contact-section" class="hover:text-primary transition-colors block">Contact</a></li>
         </ul>
-        <button class="mt-12 bg-[#C9A646] hover:bg-[#A38536] text-white px-8 py-4 rounded-full font-bold text-[15px] w-full max-w-[250px] transition-colors">
+        
+        <button class="mt-12 bg-[#C9A646] hover:bg-[#A38536] text-white px-8 py-4 rounded-full font-bold text-[15px] w-full max-w-[250px] transition-colors" onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})">
             Book a Viewing
         </button>
     </div>
@@ -1215,6 +1243,108 @@
             </div>
 
         </div>
+
+        <!-- OUR AGENTS SECTION -->
+        <div class="w-full relative px-0 md:px-12 lg:px-16 pt-16 md:pt-24 pb-16 md:pb-20 flex flex-col items-center bg-white z-10 border-t border-gray-100 overflow-hidden">
+            
+            <!-- Section Header -->
+            <h2 class="text-3xl sm:text-4xl md:text-[3.25rem] font-serif mb-10 md:mb-14 text-center">
+                <span class="text-[#0B0B0B] font-bold tracking-tight">Our Real Estate</span> 
+                <span class="text-[#989898] font-normal tracking-tight mx-1">Experts</span>
+            </h2>
+
+            <!-- Agents Slider -->
+            <div id="agents-slider" class="flex overflow-x-auto hide-scrollbar cursor-grab snap-x snap-mandatory gap-6 md:gap-8 w-full max-w-[1300px] mb-8 md:mb-10 pb-6 px-4 md:px-6 select-none">
+                
+                <!-- Agent 1 -->
+                <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
+                    <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Elena Rostova" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                    </div>
+                    <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
+                        <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">Elena Rostova</h3>
+                        <p class="font-sans text-[10px] md:text-[11px] font-bold text-[#888888] uppercase tracking-[0.2em] mt-2.5">Senior Luxury Broker</p>
+                    </div>
+                </div>
+
+                <!-- Agent 2 -->
+                <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
+                    <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Ahmed Mansour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                    </div>
+                    <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
+                        <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">Ahmed Mansour</h3>
+                        <p class="font-sans text-[10px] md:text-[11px] font-bold text-[#888888] uppercase tracking-[0.2em] mt-2.5">Off-Plan Specialist</p>
+                    </div>
+                </div>
+
+                <!-- Agent 3 -->
+                <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
+                    <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="Sophia Bennett" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                    </div>
+                    <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
+                        <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">Sophia Bennett</h3>
+                        <p class="font-sans text-[10px] md:text-[11px] font-bold text-[#888888] uppercase tracking-[0.2em] mt-2.5">Waterfront Estates</p>
+                    </div>
+                </div>
+
+                <!-- Agent 4 -->
+                <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
+                    <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80" alt="Marcus Chen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                    </div>
+                    <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
+                        <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">Marcus Chen</h3>
+                        <p class="font-sans text-[10px] md:text-[11px] font-bold text-[#888888] uppercase tracking-[0.2em] mt-2.5">Investment Advisor</p>
+                    </div>
+                </div>
+
+                <!-- Agent 5 -->
+                <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
+                    <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1598550874175-4d0ef43ee90d?auto=format&fit=crop&w=600&q=80" alt="Laila Al Fayed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                    </div>
+                    <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
+                        <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">Laila Al Fayed</h3>
+                        <p class="font-sans text-[10px] md:text-[11px] font-bold text-[#888888] uppercase tracking-[0.2em] mt-2.5">Downtown & Penthouses</p>
+                    </div>
+                </div>
+
+                <!-- Agent 6 -->
+                <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
+                    <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80" alt="David Sterling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                    </div>
+                    <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
+                        <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">David Sterling</h3>
+                        <p class="font-sans text-[10px] md:text-[11px] font-bold text-[#888888] uppercase tracking-[0.2em] mt-2.5">Managing Director</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination Dots -->
+            <div id="agents-dots" class="flex items-center justify-center gap-[6px] mb-6 md:mb-8">
+                <div class="w-6 md:w-8 h-[5px] md:h-[6px] rounded-full bg-primary transition-all duration-300 cursor-pointer"></div>
+                <div class="w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#E0E0E0] transition-all duration-300 cursor-pointer"></div>
+                <div class="w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#E0E0E0] transition-all duration-300 cursor-pointer"></div>
+                <div class="w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#E0E0E0] transition-all duration-300 cursor-pointer"></div>
+                <div class="w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#E0E0E0] transition-all duration-300 cursor-pointer"></div>
+                <div class="w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#E0E0E0] transition-all duration-300 cursor-pointer"></div>
+            </div>
+
+            <!-- Arrows -->
+            <div class="flex items-center justify-center gap-3">
+                <button id="agent-prev" class="w-8 h-8 md:w-9 md:h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600 z-10">
+                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button id="agent-next" class="w-8 h-8 md:w-9 md:h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-600 z-10">
+                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+
+        </div>
 <br><br>
         <!-- LATEST TRENDS & UPDATES SECTION -->
         <div class="w-full relative px-0 flex flex-col items-center z-10">
@@ -1627,16 +1757,22 @@
         </div>
     </footer>
 
+
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/971501234567" target="_blank" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-[#25D366] w-[3rem] h-[3rem] md:w-[3.75rem] md:h-[3.75rem] rounded-full flex items-center justify-center shadow-[0_6px_20px_rgba(37,211,102,0.35)] hover:scale-105 transition-transform z-50 group">
-        <svg class="w-[1.6rem] h-[1.6rem] md:w-[2rem] md:h-[2rem] text-white ml-[1px] mt-[1px]" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+    <a href="https://wa.me/9199077416727" target="_blank" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 hover:scale-105 transition-transform z-50 drop-shadow-[0_8px_16px_rgba(37,211,102,0.4)] group flex items-center justify-center">
+        <svg class="w-[3.5rem] h-[3.5rem] md:w-[4rem] md:h-[4rem]" viewBox="-1.5 -1.5 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- White stroke to guarantee a mathematically perfect and uniform outer line -->
+            <path d="M12.01 2C6.484 2 2 6.478 2 12c0 1.764.457 3.483 1.325 5L2 22l5.127-1.33A9.957 9.957 0 0 0 12.01 22c5.525 0 10.009-4.478 10.009-10S17.535 2 12.01 2z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Inner Green Bubble -->
+            <path d="M12.01 2C6.484 2 2 6.478 2 12c0 1.764.457 3.483 1.325 5L2 22l5.127-1.33A9.957 9.957 0 0 0 12.01 22c5.525 0 10.009-4.478 10.009-10S17.535 2 12.01 2z" fill="#25D366"/>
+            <!-- Centered White Phone Icon -->
+            <path d="M16.512 14.162c-.247-.123-1.462-.72-1.688-.802-.227-.082-.39-.123-.554.123-.165.247-.638.802-.782.966-.144.165-.288.185-.536.062-1.157-.577-2.14-1.185-2.938-2.532-.165-.276-.017-.428.104-.551.109-.11.247-.288.371-.432.124-.144.165-.247.247-.412.083-.165.041-.309-.02-.432-.062-.124-.556-1.338-.762-1.833-.2-.48-.405-.415-.556-.422-.144-.007-.31-.007-.474-.007-.164 0-.432.062-.659.35-.227.288-.865.845-.865 2.058s.885 2.389 1.009 2.553c.124.165 1.741 2.656 4.218 3.673.589.242 1.048.386 1.408.494.59.177 1.129.152 1.554.092.477-.067 1.462-.597 1.667-1.173.206-.577.206-1.071.144-1.173-.062-.103-.227-.165-.474-.288z" fill="#FFFFFF"/>
         </svg>
-        <span class="absolute top-0 right-0 w-2.5 h-2.5 md:w-3.5 md:h-3.5 bg-[#FF3B30] border-2 border-white rounded-full"></span>
+        <span class="absolute top-[4%] right-[6%] w-3.5 h-3.5 md:w-4 md:h-4 bg-[#FF3B30] border-[2.5px] border-white rounded-full pointer-events-none"></span>
     </a>
 
     <!-- FULL PAGE MODAL OVERLAY -->
-    <div id="view-all-modal" class="fixed inset-0 z-[300] bg-[#FAFAFA] transform translate-y-full transition-transform duration-500 flex flex-col">
+    <div id="view-all-modal" class="fixed inset-0 z-[300] bg-[#FAFAFA] transform translate-y-full transition-transform duration-150 flex flex-col">
         <!-- Modal Fixed Header -->
         <div class="w-full bg-white/95 backdrop-blur-md shadow-sm z-[310] flex justify-between items-center py-4 px-6 md:px-12 lg:px-20 border-b border-gray-100 flex-shrink-0">
             <!-- Logo -->
@@ -1681,14 +1817,20 @@
                 <li><a href="#contact-section" class="hover:text-primary transition-colors">Contact</a></li>
             </ul>
 
-            <!-- Controls: Book a Viewing & Theme Toggle -->
+            <!-- Controls: Book a Viewing & Theme Toggle & Menu -->
             <div class="flex items-center gap-3 md:gap-4">
-                <button class="theme-toggle-btn w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
+                <button class="theme-toggle-btn w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
                     <svg class="sun-icon w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg class="moon-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
                 <button class="bg-[#C9A646] hover:bg-[#A38536] text-white px-8 py-2.5 rounded-full font-bold text-[14px] transition-colors shadow-sm hidden md:block">
                     Book a Viewing
+                </button>
+                <button onclick="closeModalUI('view-all-modal')" class="hidden md:flex w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 items-center justify-center text-gray-800 transition-colors" title="Close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <button class="mobile-menu-btn md:hidden text-textDark ml-1">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
@@ -1699,10 +1841,6 @@
                 
                 <!-- Centered Heading & Left Aligned Return Button -->
                 <div class="relative flex items-center justify-center mb-10 w-full">
-                    <button id="close-modal-btn" class="absolute left-0 flex items-center gap-1.5 text-gray-800 hover:text-primary transition-colors font-bold text-[14px] z-10">
-                        <span class="hidden sm:block uppercase tracking-wider text-[11px] mt-[1px]">Return</span>
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
                     <h2 id="modal-heading" class="text-3xl sm:text-4xl md:text-[2.5rem] font-serif font-bold text-[#0B0B0B] tracking-tight text-center relative z-0">Explore All Collections</h2>
                 </div>
                 
@@ -3243,7 +3381,7 @@
     </div>
 
     <!-- PROPERTY DETAILS MODAL OVERLAY -->
-    <div id="property-details-modal" class="fixed inset-0 z-[400] bg-[#FAFAFA] transform translate-y-full transition-transform duration-500 flex flex-col">
+    <div id="property-details-modal" class="fixed inset-0 z-[400] bg-[#FAFAFA] transform translate-y-full transition-transform duration-150 flex flex-col">
         <!-- Modal Fixed Header -->
         <div class="w-full bg-white/95 backdrop-blur-md shadow-sm z-[410] flex justify-between items-center py-4 px-6 md:px-12 lg:px-20 border-b border-gray-100 flex-shrink-0">
             <!-- Logo -->
@@ -3288,14 +3426,20 @@
                 <li><a href="#contact-section" class="hover:text-primary transition-colors">Contact</a></li>
             </ul>
 
-            <!-- Controls: Book a Viewing & Theme Toggle -->
+            <!-- Controls: Book a Viewing & Theme Toggle & Menu -->
             <div class="flex items-center gap-3 md:gap-4">
-                <button class="theme-toggle-btn w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
+                <button class="theme-toggle-btn w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
                     <svg class="sun-icon w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg class="moon-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
                 <button class="bg-[#C9A646] hover:bg-[#A38536] text-white px-8 py-2.5 rounded-full font-bold text-[14px] transition-colors shadow-sm hidden md:block">
                     Book a Viewing
+                </button>
+                <button onclick="closeModalUI('property-details-modal')" class="hidden md:flex w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 items-center justify-center text-gray-800 transition-colors" title="Close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <button class="mobile-menu-btn md:hidden text-textDark ml-1">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
@@ -3304,27 +3448,29 @@
         <div class="flex-grow overflow-y-auto w-full pt-6 md:pt-10 pb-0">
             <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pb-16 md:pb-24">
                 
-                <!-- Back Button -->
-                <button id="close-details-btn" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-bold text-[13px] md:text-[14px] mb-6 md:mb-8 w-fit z-10">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    <span class="uppercase tracking-wider">Back to Properties</span>
-                </button>
-
                 <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
                     
                     <!-- Left: Property Info -->
                     <div class="w-full lg:w-[65%] flex flex-col">
                         
                         <!-- Main Image -->
-                        <div class="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-6 shadow-sm">
-                            <img id="modal-hero-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" alt="Property Main Image" class="w-full h-full object-cover">
+                        <div class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-6 shadow-sm group">
+                            <img id="modal-hero-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" alt="Property Main Image" class="w-full h-full object-cover transition-opacity duration-300">
+                            
+                            <!-- Slider Controls for Modal Hero Image -->
+                            <button onclick="window.slideModalImage(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center text-[#0B0B0B] opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md z-10">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button onclick="window.slideModalImage(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center text-[#0B0B0B] opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md z-10">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
                         </div>
                         
                         <!-- Image Gallery Row -->
                         <div class="grid grid-cols-3 gap-3 md:gap-4 mb-8 md:mb-10">
-                            <div class="h-[80px] sm:h-[120px] md:h-[140px] rounded-[1rem] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"><img id="modal-gal-img-1" src="https://images.unsplash.com/photo-1628624747186-a941c476b7ef?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Gallery"></div>
-                            <div class="h-[80px] sm:h-[120px] md:h-[140px] rounded-[1rem] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"><img id="modal-gal-img-2" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Gallery"></div>
-                            <div class="h-[80px] sm:h-[120px] md:h-[140px] rounded-[1rem] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity relative">
+                            <div class="h-[80px] sm:h-[120px] md:h-[140px] rounded-[1rem] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity" onclick="window.setModalImage(1)"><img id="modal-gal-img-1" src="https://images.unsplash.com/photo-1628624747186-a941c476b7ef?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Gallery"></div>
+                            <div class="h-[80px] sm:h-[120px] md:h-[140px] rounded-[1rem] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity" onclick="window.setModalImage(2)"><img id="modal-gal-img-2" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Gallery"></div>
+                            <div class="h-[80px] sm:h-[120px] md:h-[140px] rounded-[1rem] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity relative" onclick="window.setModalImage(3)">
                                 <img id="modal-gal-img-3" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Gallery">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold text-[14px] md:text-[18px]">+5</div>
                             </div>
@@ -3414,7 +3560,7 @@
                     </div>
 
                     <!-- Right: Sticky Contact Form -->
-                    <div class="w-full lg:w-[35%] relative">
+                    <div class="w-full lg:w-[35%] relative" id="modal-contact-form">
                         <div class="sticky top-[100px] bg-white border border-gray-100 rounded-[2rem] p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] flex flex-col">
                             <h3 class="font-serif text-[22px] md:text-[24px] text-[#0B0B0B] font-bold mb-2">Interested in this property?</h3>
                             <p class="text-[#666] text-[13px] md:text-[14px] mb-6">Our luxury property experts will get back to you shortly.</p>
@@ -3547,10 +3693,21 @@
                 </div>
             </footer>
         </div>
+
+        <!-- Mobile Fixed Bottom Action Bar for Property Details -->
+        <div class="w-full bg-white border-t border-gray-100 p-4 flex gap-3 lg:hidden flex-shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] z-[420] pb-safe">
+            <button class="flex-1 bg-[#C9A646] hover:bg-[#A38536] text-white font-bold text-[13px] sm:text-[14px] rounded-full py-3.5 shadow-sm transition-colors text-center whitespace-nowrap" onclick="document.getElementById('modal-contact-form').scrollIntoView({behavior: 'smooth'})">
+                Book a Viewing
+            </button>
+            <button class="flex-1 bg-transparent border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white font-bold text-[13px] sm:text-[14px] rounded-full py-3 shadow-sm transition-colors flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap" onclick="window.open('https://wa.me/9199077416727', '_blank')">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                WhatsApp
+            </button>
+        </div>
     </div>
 
     <!-- ARTICLE DETAILS MODAL OVERLAY -->
-    <div id="article-details-modal" class="fixed inset-0 z-[500] bg-[#FAFAFA] transform translate-y-full transition-transform duration-500 flex flex-col">
+    <div id="article-details-modal" class="fixed inset-0 z-[500] bg-[#FAFAFA] transform translate-y-full transition-transform duration-150 flex flex-col">
         <!-- Modal Fixed Header -->
         <div class="w-full bg-white/95 backdrop-blur-md shadow-sm z-[510] flex justify-between items-center py-4 px-6 md:px-12 lg:px-20 border-b border-gray-100 flex-shrink-0">
             <!-- Logo -->
@@ -3595,14 +3752,20 @@
                 <li><a href="#contact-section" class="hover:text-primary transition-colors">Contact</a></li>
             </ul>
 
-            <!-- Controls: Book a Viewing & Theme Toggle -->
+            <!-- Controls: Book a Viewing & Theme Toggle & Menu -->
             <div class="flex items-center gap-3 md:gap-4">
-                <button class="theme-toggle-btn w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
+                <button class="theme-toggle-btn w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
                     <svg class="sun-icon w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg class="moon-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
                 <button class="bg-[#C9A646] hover:bg-[#A38536] text-white px-8 py-2.5 rounded-full font-bold text-[14px] transition-colors shadow-sm hidden md:block">
                     Book a Viewing
+                </button>
+                <button onclick="closeModalUI('article-details-modal')" class="hidden md:flex w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 items-center justify-center text-gray-800 transition-colors" title="Close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <button class="mobile-menu-btn md:hidden text-textDark ml-1">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
@@ -3611,12 +3774,6 @@
         <div class="flex-grow overflow-y-auto w-full pt-6 md:pt-10 pb-0">
             <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pb-16 md:pb-24">
                 
-                <!-- Back Button -->
-                <button id="close-article-btn" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-bold text-[13px] md:text-[14px] mb-6 md:mb-8 w-fit z-10">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    <span class="uppercase tracking-wider">Back to Articles</span>
-                </button>
-
                 <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
                     
                     <!-- Left: Article Content -->
@@ -3785,6 +3942,75 @@
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- History API & Modal Management ---
+            let activeModals = [];
+            
+            window.openAppModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if (!modal) return;
+                
+                history.pushState({ modalId: modalId }, '', window.location.href);
+                activeModals.push(modalId);
+                
+                modal.classList.remove('translate-y-full');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeTopModal = function() {
+                if (activeModals.length > 0) {
+                    const modalId = activeModals.pop();
+                    const modal = document.getElementById(modalId);
+                    if (modal) modal.classList.add('translate-y-full');
+                    if (activeModals.length === 0) document.body.style.overflow = '';
+                }
+            };
+
+            window.addEventListener('popstate', (e) => {
+                window.closeTopModal();
+            });
+
+            window.closeModalUI = function(modalId) {
+                if (history.state && history.state.modalId === modalId) {
+                    history.back(); // Triggers popstate
+                } else {
+                    const index = activeModals.indexOf(modalId);
+                    if (index > -1) activeModals.splice(index, 1);
+                    const modal = document.getElementById(modalId);
+                    if (modal) modal.classList.add('translate-y-full');
+                    if (activeModals.length === 0) document.body.style.overflow = '';
+                }
+            };
+
+            window.closeAllModalsForce = function() {
+                activeModals.forEach(id => {
+                    const m = document.getElementById(id);
+                    if (m) m.classList.add('translate-y-full');
+                });
+                activeModals = [];
+                document.body.style.overflow = '';
+            };
+
+            window.currentModalImages = [];
+            window.currentModalImgIdx = 0;
+
+            window.slideModalImage = function(dir) {
+                if (!window.currentModalImages || window.currentModalImages.length === 0) return;
+                window.currentModalImgIdx += dir;
+                if (window.currentModalImgIdx < 0) window.currentModalImgIdx = window.currentModalImages.length - 1;
+                if (window.currentModalImgIdx >= window.currentModalImages.length) window.currentModalImgIdx = 0;
+                const heroImg = document.getElementById('modal-hero-img');
+                if (heroImg) heroImg.src = window.currentModalImages[window.currentModalImgIdx];
+            };
+
+            window.setModalImage = function(idx) {
+                if (!window.currentModalImages || window.currentModalImages.length === 0) return;
+                if (idx >= 0 && idx < window.currentModalImages.length) {
+                    window.currentModalImgIdx = idx;
+                    const heroImg = document.getElementById('modal-hero-img');
+                    if (heroImg) heroImg.src = window.currentModalImages[window.currentModalImgIdx];
+                }
+            };
+
             // 1. Sticky Header
             const stickyHeader = document.getElementById('sticky-header');
             window.addEventListener('scroll', () => {
@@ -3812,10 +4038,13 @@
                 });
             }
             
-            // Auto close mobile menu on click
-            document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(link => {
+            // Auto close mobile menu on click, excluding the close button itself
+            document.querySelectorAll('#mobile-menu a, #mobile-menu button:not(#close-menu-btn)').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('translate-x-full');
+                    if (window.closeAllModalsForce) {
+                        window.closeAllModalsForce();
+                    }
                 });
             });
 
@@ -3830,13 +4059,7 @@
                         e.preventDefault();
                         
                         // Close any open modals
-                        ['view-all-modal', 'property-details-modal', 'article-details-modal'].forEach(id => {
-                            const m = document.getElementById(id);
-                            if(m && !m.classList.contains('translate-y-full')) {
-                                m.classList.add('translate-y-full');
-                                document.body.style.overflow = '';
-                            }
-                        });
+                        window.closeAllModalsForce();
 
                         // Scroll to target
                         targetElement.scrollIntoView({ behavior: 'smooth' });
@@ -3847,7 +4070,7 @@
                             setTimeout(() => {
                                 const filterBtn = document.querySelector(`.filter-btn[data-filter="${filterTarget}"]`);
                                 if(filterBtn) filterBtn.click();
-                            }, 300); // Slight delay to allow scrolling to start
+                            }, 50); // Faster tab switching
                         }
                     }
                 });
@@ -3858,13 +4081,7 @@
                 if(btn.textContent.trim() === 'Book a Viewing') {
                     btn.addEventListener('click', () => {
                         // Close any open modals
-                        ['view-all-modal', 'property-details-modal', 'article-details-modal'].forEach(id => {
-                            const m = document.getElementById(id);
-                            if(m && !m.classList.contains('translate-y-full')) {
-                                m.classList.add('translate-y-full');
-                                document.body.style.overflow = '';
-                            }
-                        });
+                        window.closeAllModalsForce();
                         
                         const contactSection = document.getElementById('contact-section');
                         if (contactSection) {
@@ -4032,6 +4249,86 @@
                 }
             }
 
+            // 5.5 Drag to Scroll & Sync for Agents Section
+            const agentsSlider = document.getElementById('agents-slider');
+            const agentsDotsContainer = document.getElementById('agents-dots');
+            const agentPrev = document.getElementById('agent-prev');
+            const agentNext = document.getElementById('agent-next');
+
+            if(agentsSlider) {
+                let isAgentDown = false;
+                let agentStartX;
+                let agentScrollLeft;
+
+                agentsSlider.addEventListener('mousedown', (e) => {
+                    isAgentDown = true;
+                    agentsSlider.classList.remove('snap-x', 'snap-mandatory');
+                    agentsSlider.style.cursor = 'grabbing';
+                    agentStartX = e.pageX - agentsSlider.offsetLeft;
+                    agentScrollLeft = agentsSlider.scrollLeft;
+                });
+                agentsSlider.addEventListener('mouseleave', () => {
+                    isAgentDown = false;
+                    agentsSlider.classList.add('snap-x', 'snap-mandatory');
+                    agentsSlider.style.cursor = 'grab';
+                });
+                agentsSlider.addEventListener('mouseup', () => {
+                    isAgentDown = false;
+                    agentsSlider.classList.add('snap-x', 'snap-mandatory');
+                    agentsSlider.style.cursor = 'grab';
+                });
+                agentsSlider.addEventListener('mousemove', (e) => {
+                    if (!isAgentDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - agentsSlider.offsetLeft;
+                    const walk = (x - agentStartX) * 2;
+                    agentsSlider.scrollLeft = agentScrollLeft - walk;
+                });
+
+                if (agentsDotsContainer) {
+                    const agentDots = Array.from(agentsDotsContainer.children);
+                    const updateAgentDots = () => {
+                        const maxScrollLeft = agentsSlider.scrollWidth - agentsSlider.clientWidth;
+                        if (maxScrollLeft <= 0) return;
+                        
+                        let scrollPercentage = agentsSlider.scrollLeft / maxScrollLeft;
+                        scrollPercentage = Math.max(0, Math.min(1, scrollPercentage));
+                        const activeIndex = Math.round(scrollPercentage * (agentDots.length - 1));
+                        
+                        agentDots.forEach((dot, index) => {
+                            if (index === activeIndex) {
+                                dot.className = "w-6 md:w-8 h-[5px] md:h-[6px] rounded-full bg-primary transition-all duration-300 cursor-pointer";
+                            } else {
+                                dot.className = "w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#E0E0E0] transition-all duration-300 cursor-pointer";
+                            }
+                        });
+                    };
+
+                    agentsSlider.addEventListener('scroll', updateAgentDots);
+                    window.addEventListener('resize', updateAgentDots);
+                    
+                    agentDots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            const maxScrollLeft = agentsSlider.scrollWidth - agentsSlider.clientWidth;
+                            const scrollPos = (index / (agentDots.length - 1)) * maxScrollLeft;
+                            agentsSlider.scrollTo({ left: scrollPos, behavior: 'smooth' });
+                        });
+                    });
+                    setTimeout(updateAgentDots, 100);
+                }
+
+                if (agentPrev) {
+                    agentPrev.addEventListener('click', () => {
+                        agentsSlider.scrollBy({ left: -agentsSlider.clientWidth / 1.5, behavior: 'smooth' });
+                    });
+                }
+                if (agentNext) {
+                    agentNext.addEventListener('click', () => {
+                        agentsSlider.scrollBy({ left: agentsSlider.clientWidth / 1.5, behavior: 'smooth' });
+                    });
+                }
+            }
+
             // 6. View All Modal Logic
             const viewAllBtns = document.querySelectorAll('.view-all-btn');
             const viewAllModal = document.getElementById('view-all-modal');
@@ -4071,17 +4368,9 @@
                     const allFilterBtn = document.querySelector('.modal-filter-btn[data-modal-filter="all"]');
                     if (allFilterBtn && modalType === 'dream') allFilterBtn.click();
 
-                    viewAllModal.classList.remove('translate-y-full');
-                    document.body.style.overflow = 'hidden'; // Stop background scrolling
+                    window.openAppModal('view-all-modal');
                 });
             });
-
-            if(closeModalBtn) {
-                closeModalBtn.addEventListener('click', () => {
-                    viewAllModal.classList.add('translate-y-full');
-                    document.body.style.overflow = ''; // Restore background scrolling
-                });
-            }
 
             // 6.b Modal Filter Logic
             const modalFilterBtns = document.querySelectorAll('.modal-filter-btn');
@@ -4171,8 +4460,7 @@
                         modalHeading.textContent = locationName + ' Properties';
                     }
 
-                    viewAllModal.classList.remove('translate-y-full');
-                    document.body.style.overflow = 'hidden'; // Stop background scrolling
+                    window.openAppModal('view-all-modal');
                 });
             });
 
@@ -4302,31 +4590,28 @@
                         // 6. Generate 3 unique gallery images consistently based on title text
                         if (modalGalImg1 && modalGalImg2 && modalGalImg3) {
                             const hash = titleText.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-                            modalGalImg1.src = galleryPool[(hash) % galleryPool.length];
-                            modalGalImg2.src = galleryPool[(hash + 3) % galleryPool.length];
-                            modalGalImg3.src = galleryPool[(hash + 6) % galleryPool.length];
+                            const img1 = galleryPool[(hash) % galleryPool.length];
+                            const img2 = galleryPool[(hash + 3) % galleryPool.length];
+                            const img3 = galleryPool[(hash + 6) % galleryPool.length];
+                            
+                            modalGalImg1.src = img1;
+                            modalGalImg2.src = img2;
+                            modalGalImg3.src = img3;
+
+                            // Set up the gallery for sliding
+                            if (imgEl) {
+                                window.currentModalImages = [imgEl.src, img1, img2, img3];
+                                window.currentModalImgIdx = 0;
+                            }
                         }
                     }
 
                     // Open the modal
                     if(detailsModal) {
-                        detailsModal.classList.remove('translate-y-full');
-                        document.body.style.overflow = 'hidden';
+                        window.openAppModal('property-details-modal');
                     }
                 }
             });
-
-            if (closeDetailsBtn) {
-                closeDetailsBtn.addEventListener('click', () => {
-                    detailsModal.classList.add('translate-y-full');
-                    
-                    // Check if view-all modal is also open. If not, restore body scroll.
-                    const viewAllModal = document.getElementById('view-all-modal');
-                    if (viewAllModal && viewAllModal.classList.contains('translate-y-full')) {
-                        document.body.style.overflow = ''; 
-                    }
-                });
-            }
 
             // 9. Article Details Modal Logic
             const articleModal = document.getElementById('article-details-modal');
@@ -4397,23 +4682,10 @@
                     
                     // Open Modal
                     if (articleModal) {
-                        articleModal.classList.remove('translate-y-full');
-                        document.body.style.overflow = 'hidden'; // Stop background scrolling
+                        window.openAppModal('article-details-modal');
                     }
                 }
             });
-
-            if (closeArticleBtn) {
-                closeArticleBtn.addEventListener('click', () => {
-                    articleModal.classList.add('translate-y-full');
-                    
-                    // If the View All modal is NOT open, restore scrolling
-                    const viewAllModal = document.getElementById('view-all-modal');
-                    if (viewAllModal && viewAllModal.classList.contains('translate-y-full')) {
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
 
             // --- Theme Toggle Logic ---
             const themeBtns = document.querySelectorAll('.theme-toggle-btn');
