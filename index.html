@@ -154,9 +154,9 @@
         .dark-mode .border-gray-300 { border-color: #52525B !important; }
         .dark-mode .bg-\[\#FAFAFA\] { background-color: #1F2937 !important; }
         .dark-mode #sticky-header, .dark-mode .bg-white\/95 { background-color: rgba(24, 24, 27, 0.95) !important; }
-        .dark-mode #view-all-modal, .dark-mode #property-details-modal, .dark-mode #article-details-modal, .dark-mode #text-modal { background-color: #121212 !important; }
         
-        .dark-mode .hero-book-wrapper { background-color: #121212 !important; }
+        /* Preloader Styles */
+        #preloader {
             position: fixed;
             top: 0;
             left: 0;
@@ -3978,194 +3978,21 @@
         </div>
     </div>
 
-    <!-- TEXT MODAL OVERLAY (Quick Links) -->
-    <div id="text-modal" class="fixed inset-0 z-[500] bg-[#FAFAFA] transform translate-y-full transition-transform duration-150 flex flex-col">
-        <!-- Modal Fixed Header -->
-        <div class="w-full bg-white/95 backdrop-blur-md shadow-sm z-[510] flex justify-between items-center py-4 px-6 md:px-12 lg:px-20 border-b border-gray-100 flex-shrink-0">
-            <!-- Logo -->
-            <div class="flex flex-col items-center cursor-pointer mt-1">
-                <svg viewBox="0 0 100 40" class="w-[48px] h-[20px] mb-1">
-                    <path d="M10 35 L25 10 L40 35" stroke="#C9A646" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M25 35 L40 15 L55 35" stroke="#0B0B0B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M40 35 L55 10 L70 35" stroke="#C9A646" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="font-sans text-[8.5px] font-bold text-[#C9A646] tracking-[0.1em] leading-none">GLOBAL ACRES</span>
-            </div>
-            
-            <!-- Navigation Links -->
-            <ul class="hidden lg:flex items-center gap-9 text-[14.5px] font-semibold text-[#0B0B0B]">
-                <li><a href="#top" class="hover:text-primary transition-colors">Home</a></li>
-                <li class="relative group cursor-pointer py-4">
-                    <div class="flex items-center gap-1.5 hover:text-primary transition-colors">
-                        Dubai Properties <svg class="w-2.5 h-2.5 mt-0.5 text-gray-800 group-hover:text-primary transition-colors" viewBox="0 0 8 6" fill="currentColor"><path d="M4 6L0 0H8L4 6Z"/></svg>
-                    </div>
-                    <div class="absolute top-[100%] left-0 w-48 bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.08)] rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0">
-                        <ul class="flex flex-col py-2">
-                            <li class="px-4 py-2.5 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px] border-b border-gray-50 last:border-0" data-location-trigger="Dubai Marina">Dubai Marina</li>
-                            <li class="px-4 py-2.5 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px] border-b border-gray-50 last:border-0" data-location-trigger="Downtown Dubai">Downtown Dubai</li>
-                            <li class="px-4 py-2.5 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px] border-b border-gray-50 last:border-0" data-location-trigger="Palm Jumeirah">Palm Jumeirah</li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="relative group cursor-pointer py-4">
-                    <div class="flex items-center gap-1.5 hover:text-primary transition-colors">
-                        Abu Dhabi Properties <svg class="w-2.5 h-2.5 mt-0.5 text-gray-800 group-hover:text-primary transition-colors" viewBox="0 0 8 6" fill="currentColor"><path d="M4 6L0 0H8L4 6Z"/></svg>
-                    </div>
-                    <div class="absolute top-[100%] left-0 w-48 bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.08)] rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0">
-                        <ul class="flex flex-col py-2">
-                            <li class="px-4 py-2.5 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px] border-b border-gray-50 last:border-0" data-location-trigger="Saadiyat Island">Saadiyat Island</li>
-                            <li class="px-4 py-2.5 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px] border-b border-gray-50 last:border-0" data-location-trigger="Yas Island">Yas Island</li>
-                            <li class="px-4 py-2.5 hover:bg-gray-50 hover:text-primary transition-colors text-[13.5px] border-b border-gray-50 last:border-0" data-location-trigger="Al Raha Beach">Al Raha Beach</li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="#dream-place-section" class="hover:text-primary transition-colors filter-nav-link" data-filter-target="off-plan">Off-Plan Projects</a></li>
-                <li><a href="#dream-place-section" class="hover:text-primary transition-colors filter-nav-link" data-filter-target="villas">Luxury Villas</a></li>
-                <li><a href="#contact-section" class="hover:text-primary transition-colors">Contact</a></li>
-            </ul>
-
-            <!-- Controls: Book a Viewing & Theme Toggle & Menu -->
-            <div class="flex items-center gap-3 md:gap-4">
-                <button class="theme-toggle-btn w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors" title="Toggle Dark Mode">
-                    <svg class="sun-icon w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <svg class="moon-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
-                <button class="bg-[#C9A646] hover:bg-[#A38536] text-white px-8 py-2.5 rounded-full font-bold text-[14px] transition-colors shadow-sm hidden md:block">
-                    Book a Viewing
-                </button>
-                <button onclick="closeModalUI('text-modal')" class="hidden md:flex w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 items-center justify-center text-gray-800 transition-colors" title="Close">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                <button class="mobile-menu-btn md:hidden text-textDark ml-1">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Modal Content Area -->
-        <div class="flex-grow overflow-y-auto w-full pt-10 md:pt-14 pb-0">
-            <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pb-16 md:pb-24">
-                <div class="max-w-3xl mx-auto bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100">
-                    <h1 id="text-modal-title" class="text-3xl md:text-[2.5rem] font-serif font-bold text-[#0B0B0B] leading-tight tracking-tight mb-8 border-b border-gray-100 pb-6 uppercase">Title</h1>
-                    <div id="text-modal-content" class="text-[#555] font-sans text-[15px] md:text-[16px] leading-[1.8] space-y-6">
-                        <!-- Content injected here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- MODAL FOOTER SECTION -->
-            <footer class="w-full bg-white pt-12 md:pt-20 pb-6 border-t border-gray-100 flex flex-col items-center mt-8 md:mt-12">
-                <div class="w-full max-w-[1300px] px-6 md:px-12 lg:px-16 flex flex-col">
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12 md:mb-16">
-                        
-                        <!-- Contact Us -->
-                        <div>
-                            <h3 class="font-serif text-[20px] md:text-[22px] text-[#0B0B0B] font-bold mb-5 md:mb-6">Contact Us</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3 text-[#555555] text-[13px] md:text-[14px] font-medium">
-                                    <svg class="w-5 h-5 flex-shrink-0 text-gray-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    <span>Boulevard Plaza, Downtown Dubai, UAE</span>
-                                </li>
-                                <li class="flex items-center gap-3 text-[#555555] text-[13px] md:text-[14px] font-medium">
-                                    <svg class="w-5 h-5 flex-shrink-0 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                                    <span>+971 50 123 4567</span>
-                                </li>
-                                <li class="flex items-center gap-3 text-[#555555] text-[13px] md:text-[14px] font-medium">
-                                    <svg class="w-5 h-5 flex-shrink-0 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                    <span>info@globalacres.ae</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Quick Links -->
-                        <div>
-                            <h3 class="font-serif text-[20px] md:text-[22px] text-[#0B0B0B] font-bold mb-5 md:mb-6">Quick Links</h3>
-                            <ul class="space-y-3.5 text-[#555555] text-[13px] md:text-[14px] font-medium">
-                                <li><a href="#" class="hover:text-primary transition-colors">Home</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Contact Us</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Terms & Conditions</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">FAQ</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Lists by Category -->
-                        <div>
-                            <h3 class="font-serif text-[20px] md:text-[22px] text-[#0B0B0B] font-bold mb-5 md:mb-6">Properties</h3>
-                            <ul class="space-y-3.5 text-[#555555] text-[13px] md:text-[14px] font-medium">
-                                <li><a href="#" class="hover:text-primary transition-colors">Luxury Villas</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Penthouses</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Off-Plan Projects</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Waterfront Homes</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Discover -->
-                        <div>
-                            <h3 class="font-serif text-[20px] md:text-[22px] text-[#0B0B0B] font-bold mb-5 md:mb-6">Discover</h3>
-                            <ul class="space-y-3.5 text-[#555555] text-[13px] md:text-[14px] font-medium">
-                                <li><a href="#" class="hover:text-primary transition-colors">Dubai Marina</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Downtown Dubai</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Palm Jumeirah</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Abu Dhabi</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Business Bay</a></li>
-                                <li><a href="#" class="hover:text-primary transition-colors">Sharjah</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Newsletter -->
-                        <div class="lg:col-span-1">
-                            <h3 class="font-serif text-[20px] md:text-[22px] text-[#0B0B0B] font-bold mb-5 md:mb-6">Newsletter</h3>
-                            <div class="flex items-center border border-gray-300 rounded-full overflow-hidden w-full h-[42px] focus-within:border-primary transition-colors">
-                                <input type="email" placeholder="Your Email" class="bg-transparent px-4 py-2 w-full text-[13px] md:text-[13.5px] outline-none text-gray-800 placeholder-gray-500 h-full">
-                                <button class="bg-[#C9A646] hover:bg-[#A38536] text-white font-bold text-[13px] md:text-[13.5px] px-5 md:px-6 h-full transition-colors border-l border-gray-300">
-                                    OK
-                                </button>
-                            </div>
-                            <p class="text-[#555555] text-[12px] md:text-[12.5px] font-medium mt-4">We don't send spam so don't worry.</p>
-                        </div>
-
-                    </div>
-
-                    <!-- Bottom Copyright & Socials -->
-                    <div class="border-t border-gray-200 pt-6 w-full flex flex-col md:flex-row justify-between items-center gap-4">
-                        
-                        <div class="flex flex-col items-center justify-center cursor-pointer">
-                            <svg viewBox="0 0 100 40" class="w-[50px] h-[22px] mb-1">
-                                <path d="M10 35 L25 10 L40 35" stroke="#C9A646" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M25 35 L40 15 L55 35" stroke="#0B0B0B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M40 35 L55 10 L70 35" stroke="#C9A646" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span class="font-sans text-[8.5px] font-bold text-[#C9A646] tracking-[0.1em] leading-none">GLOBAL ACRES</span>
-                        </div>
-
-                        <p class="text-[#0B0B0B] font-bold text-[11px] md:text-[12.5px] text-center">Copyright © 2026 Globalacres. All Right Reserved.</p>
-
-                        <div class="flex items-center gap-2.5">
-                            <a href="#" class="w-[28px] h-[28px] rounded-full bg-[#C9A646] flex items-center justify-center text-white hover:bg-[#A38536] transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                            </a>
-                            <a href="#" class="w-[28px] h-[28px] rounded-full bg-[#C9A646] flex items-center justify-center text-white hover:bg-[#A38536] transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
-                            </a>
-                            <a href="#" class="w-[28px] h-[28px] rounded-full bg-[#C9A646] flex items-center justify-center text-white hover:bg-[#A38536] transition-colors">
-                                <svg class="w-[15px] h-[15px] mt-[1px]" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                            </a>
-                            <a href="#" class="w-[28px] h-[28px] rounded-full bg-[#C9A646] flex items-center justify-center text-white hover:bg-[#A38536] transition-colors">
-                                <svg class="w-[15px] h-[15px]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </footer>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script>
+        // --- Preloader Logic ---
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                // Keep the luxury animation visible for exactly 3 seconds
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    setTimeout(() => preloader.remove(), 600); // Remove from DOM after fade out
+                }, 3000); 
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             
             // --- Global Fallback for ALL Broken Images (Network-Proof) ---
@@ -5026,58 +4853,6 @@
                     });
                 });
             });
-
-            // --- 10. Text Modals for Quick Links ---
-            document.querySelectorAll('footer a, #mobile-menu a').forEach(link => {
-                const text = link.textContent.trim();
-                const textModalPages = ['About Us', 'Privacy Policy', 'Terms & Conditions', 'FAQ'];
-                
-                if (textModalPages.includes(text)) {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.openTextModal(text);
-                    });
-                } else if (text === 'Home') {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.closeAllModalsForce();
-                        window.scrollTo({top: 0, behavior: 'smooth'});
-                    });
-                } else if (text === 'Contact Us') {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.closeAllModalsForce();
-                        const contactSection = document.getElementById('contact-section');
-                        if (contactSection) {
-                            contactSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    });
-                }
-            });
-
-            window.openTextModal = function(title) {
-                const modal = document.getElementById('text-modal');
-                const titleEl = document.getElementById('text-modal-title');
-                const contentEl = document.getElementById('text-modal-content');
-                
-                if (!modal || !titleEl || !contentEl) return;
-
-                titleEl.textContent = title;
-                
-                let content = '';
-                if (title === 'About Us') {
-                    content = '<p>Global Acres is the premier luxury real estate agency in the United Arab Emirates. We specialize in curating the finest properties, from beachfront villas to sky-high penthouses.</p><p>With an exclusive portfolio and unparalleled market knowledge, our dedicated team of experts provides a seamless, confidential, and highly personalized experience tailored to the world\'s most discerning buyers and investors.</p>';
-                } else if (title === 'Privacy Policy') {
-                    content = '<p>At Global Acres, we value your privacy. We securely protect any personal information you provide when using our services or website.</p><p>We only collect data necessary to enhance your real estate experience and do not share your information with third parties without your explicit consent.</p><p>All data is processed using industry-standard encryption, and you retain the right to request deletion of your information at any point.</p>';
-                } else if (title === 'Terms & Conditions') {
-                    content = '<p>By accessing and using the Global Acres website, you accept and agree to be bound by our terms and provisions.</p><p>All property details, pricing, and availability are subject to change. Global Acres acts as an intermediary and is not liable for changes made by developers.</p><p>Any disputes arising from the use of this platform shall be governed by the laws of the United Arab Emirates.</p>';
-                } else if (title === 'FAQ') {
-                    content = '<div><h4 class="font-bold text-[#0B0B0B] dark:text-white mb-2 text-lg">How do I book a viewing?</h4><p class="mb-4">You can easily book a viewing by clicking the "Book a Viewing" button on any property listing or contacting us directly via WhatsApp.</p></div><div><h4 class="font-bold text-[#0B0B0B] dark:text-white mb-2 text-lg">Do you offer off-plan properties?</h4><p class="mb-4">Yes, we have an extensive portfolio of premium off-plan projects from Dubai and Abu Dhabi\'s top developers.</p></div><div><h4 class="font-bold text-[#0B0B0B] dark:text-white mb-2 text-lg">Are you licensed?</h4><p>Yes, Global Acres operates under strict compliance with the Real Estate Regulatory Agency (RERA) in Dubai.</p></div>';
-                }
-
-                contentEl.innerHTML = content;
-                window.openAppModal('text-modal');
-            };
 
         });
     </script>
