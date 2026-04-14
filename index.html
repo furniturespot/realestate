@@ -154,39 +154,64 @@
         .dark-mode .border-gray-300 { border-color: #52525B !important; }
         .dark-mode .bg-\[\#FAFAFA\] { background-color: #1F2937 !important; }
         .dark-mode #sticky-header, .dark-mode .bg-white\/95 { background-color: rgba(24, 24, 27, 0.95) !important; }
-        .dark-mode #view-all-modal, .dark-mode #property-details-modal, .dark-mode #article-details-modal { background-color: #121212 !important; }
         
-        .dark-mode .hero-book-wrapper { background-color: #121212 !important; }
-        .dark-mode .cutout-top-right-left-curve { background: radial-gradient(circle at bottom left, transparent 2.5rem, #121212 2.5rem) !important; }
-        .dark-mode .cutout-top-right-bottom-curve { background: radial-gradient(circle at bottom left, transparent 2.5rem, #121212 2.5rem) !important; }
-        .dark-mode .tab-left-curve, .dark-mode .tab-left-curve-dream { background: radial-gradient(circle at top left, transparent 2rem, #111827 2rem) !important; }
-        .dark-mode .tab-right-curve, .dark-mode .tab-right-curve-dream { background: radial-gradient(circle at top right, transparent 2rem, #111827 2rem) !important; }
-        
-        .dark-mode .contact-cutout-tr { background: radial-gradient(circle at bottom left, transparent 1.5rem, #121212 1.5rem) !important; }
-        .dark-mode .contact-cutout-bl { background: radial-gradient(circle at top right, transparent 1.5rem, #121212 1.5rem) !important; }
-        @media (min-width: 768px) {
-            .dark-mode .contact-cutout-tr { background: radial-gradient(circle at bottom left, transparent 2rem, #121212 2rem) !important; }
-            .dark-mode .contact-cutout-bl { background: radial-gradient(circle at top right, transparent 2rem, #121212 2rem) !important; }
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        
-        .dark-mode #contact-section > .bg-white { background-color: #121212 !important; }
-
-        .dark-mode .view-all-wrapper,
-        .dark-mode .mask-viewall-left,
-        .dark-mode .mask-viewall-right {
-            background-color: #121212 !important;
+        .loader-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
-        .dark-mode .hero-section { background-image: linear-gradient(to right, rgba(18, 18, 18, 0.9) 0%, rgba(18, 18, 18, 0.6) 40%, rgba(18, 18, 18, 0) 70%), url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=3270&q=80') !important; }
-        .dark-mode .contact-section-bg { background-color: #121212 !important; background-image: linear-gradient(to right, rgba(24, 24, 27, 0.95) 0%, rgba(24, 24, 27, 0.6) 40%, rgba(24, 24, 27, 0) 75%), url('https://images.unsplash.com/photo-1546412414-e1885259563a?q=80&w=3270&auto=format&fit=crop') !important; }
-        
-        .dark-mode input, .dark-mode textarea { background-color: #27272A !important; border-color: #3F3F46 !important; color: #FFF !important; }
-        .dark-mode input::placeholder, .dark-mode textarea::placeholder { color: #A1A1AA !important; }
-        .dark-mode .text-\[\#333333\], .dark-mode .text-\[\#444444\] { color: #D4D4D8 !important; }
-        .dark-mode .bg-white\/70, .dark-mode .bg-white\/60, .dark-mode .bg-white\/40 { background-color: rgba(39, 39, 42, 0.6) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
+        .loader-spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(201, 166, 70, 0.25);
+            border-top: 2px solid #C9A646;
+            border-radius: 50%;
+            animation: spin-loader 1s linear infinite;
+            margin: 24px auto 16px auto;
+        }
+        @keyframes spin-loader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="font-sans text-textDark antialiased overflow-x-hidden" id="top">
+
+    <!-- PRELOADER EXTRACTED FROM FILE -->
+    <div id="preloader">
+        <div class="loader-content">
+            <!-- Logo -->
+            <svg viewBox="0 0 100 40" class="w-[55px] h-[22px] md:w-[65px] md:h-[26px] mb-5">
+                <path d="M10 35 L25 10 L40 35" stroke="#C9A646" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M25 35 L40 15 L55 35" stroke="#0B0B0B" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M40 35 L55 10 L70 35" stroke="#C9A646" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            
+            <!-- Logo Name -->
+            <h2 class="font-serif text-[1.75rem] md:text-[2.2rem] text-[#0B0B0B] font-normal tracking-wide uppercase leading-none">Global Acres</h2>
+            
+            <!-- Extracted Spinner -->
+            <div class="loader-spinner"></div>
+            
+            <!-- Tagline -->
+            <span class="font-sans text-[10px] md:text-[12px] font-medium text-[#888888] tracking-[0.35em] uppercase">Find Your Dream Home</span>
+        </div>
+    </div>
 
     <!-- MOBILE MENU OVERLAY -->
     <div id="mobile-menu" class="fixed inset-0 bg-[#0B0B0B]/95 backdrop-blur-xl z-[600] transform translate-x-full transition-transform duration-150 flex flex-col pt-24 px-8 md:hidden overflow-y-auto pb-12">
@@ -1270,7 +1295,7 @@
                 <!-- Agent 2 -->
                 <div class="group flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-primary w-[75vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center hover:-translate-y-1 transition-transform duration-500 cursor-pointer">
                     <div class="w-full h-[280px] md:h-[320px] relative overflow-hidden bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Ahmed Mansour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                        <img src="https://img.freepik.com/free-photo/front-view-man-working-as-real-estate-agent_23-2151064809.jpg" alt="Ahmed Mansour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
                     </div>
                     <div class="p-5 md:p-6 pb-6 md:pb-8 text-left flex flex-col justify-center bg-white flex-grow">
                         <h3 class="font-sans font-bold text-[20px] md:text-[22px] text-[#0B0B0B] leading-none tracking-tight">Ahmed Mansour</h3>
@@ -3572,10 +3597,10 @@
                             
                             <!-- Agent Profile Header -->
                             <div class="flex items-center gap-4 mb-6">
-                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Elena Rostova" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover shadow-sm border-[3px] border-gray-50 flex-shrink-0">
+                                
                                 <div class="flex flex-col">
                                     <h3 class="font-serif text-[20px] md:text-[22px] text-[#0B0B0B] font-bold leading-tight">Interested in this property?</h3>
-                                    <p class="text-[#666] text-[12px] md:text-[13.5px] mt-1.5"><strong class="text-[#0B0B0B]">Elena Rostova</strong> &bull; Senior Broker</p>
+                                    <p class="text-[#666] text-[12px] md:text-[13.5px] mt-1.5"><strong class="text-[#0B0B0B]"></strong> Our luxury property experts will get back to you shortly.</p>
                                 </div>
                             </div>
                             
@@ -3955,6 +3980,19 @@
 
     <!-- Scripts -->
     <script>
+        // --- Preloader Logic ---
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                // Keep the luxury animation visible for exactly 3 seconds
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    setTimeout(() => preloader.remove(), 600); // Remove from DOM after fade out
+                }, 3000); 
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             
             // --- Global Fallback for ALL Broken Images (Network-Proof) ---
