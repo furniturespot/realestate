@@ -3453,15 +3453,22 @@
                     <!-- Left: Property Info -->
                     <div class="w-full lg:w-[65%] flex flex-col">
                         
-                        <!-- Main Image -->
-                        <div id="modal-image-container" class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-6 shadow-sm group touch-pan-y">
-                            <img id="modal-hero-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" alt="Property Main Image" class="w-full h-full object-cover transition-opacity duration-300">
+                        <!-- Main Image Slider -->
+                        <div class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-6 shadow-sm group">
+                            
+                            <!-- Scrollable Track -->
+                            <div id="modal-image-track" class="flex w-full h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth cursor-grab">
+                                <img id="modal-hero-img-0" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" alt="Property Image 1" class="w-full h-full flex-shrink-0 object-cover snap-center">
+                                <img id="modal-hero-img-1" src="" alt="Property Image 2" class="w-full h-full flex-shrink-0 object-cover snap-center hidden">
+                                <img id="modal-hero-img-2" src="" alt="Property Image 3" class="w-full h-full flex-shrink-0 object-cover snap-center hidden">
+                                <img id="modal-hero-img-3" src="" alt="Property Image 4" class="w-full h-full flex-shrink-0 object-cover snap-center hidden">
+                            </div>
                             
                             <!-- Slider Controls for Modal Hero Image -->
-                            <button onclick="window.slideModalImage(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center text-[#0B0B0B] opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md z-10">
+                            <button onclick="window.scrollModalImage(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center text-[#0B0B0B] opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md z-10">
                                 <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
-                            <button onclick="window.slideModalImage(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center text-[#0B0B0B] opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md z-10">
+                            <button onclick="window.scrollModalImage(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center text-[#0B0B0B] opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md z-10">
                                 <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -4009,38 +4016,28 @@
                 document.body.style.overflow = '';
             };
 
-            window.currentModalImages = [];
-            window.currentModalImgIdx = 0;
-
-            window.slideModalImage = function(dir) {
-                if (!window.currentModalImages || window.currentModalImages.length === 0) return;
-                window.currentModalImgIdx += dir;
-                if (window.currentModalImgIdx < 0) window.currentModalImgIdx = window.currentModalImages.length - 1;
-                if (window.currentModalImgIdx >= window.currentModalImages.length) window.currentModalImgIdx = 0;
-                
-                const heroImg = document.getElementById('modal-hero-img');
-                if (heroImg) {
-                    // Smooth crossfade animation for premium feel
-                    heroImg.style.opacity = '0.3';
-                    setTimeout(() => {
-                        heroImg.src = window.currentModalImages[window.currentModalImgIdx];
-                        heroImg.style.opacity = '1';
-                    }, 150);
+            window.scrollModalImage = function(dir) {
+                const track = document.getElementById('modal-image-track');
+                if (track) {
+                    const width = track.clientWidth;
+                    // Calculate current index based on scroll position
+                    const currentIndex = Math.round(track.scrollLeft / width);
+                    let newIndex = currentIndex + dir;
+                    
+                    // Wrap around logic
+                    const totalImages = track.querySelectorAll('img:not(.hidden)').length;
+                    if (newIndex < 0) newIndex = totalImages - 1;
+                    if (newIndex >= totalImages) newIndex = 0;
+                    
+                    track.scrollTo({ left: newIndex * width, behavior: 'smooth' });
                 }
             };
 
             window.setModalImage = function(idx) {
-                if (!window.currentModalImages || window.currentModalImages.length === 0) return;
-                if (idx >= 0 && idx < window.currentModalImages.length) {
-                    window.currentModalImgIdx = idx;
-                    const heroImg = document.getElementById('modal-hero-img');
-                    if (heroImg) {
-                        heroImg.style.opacity = '0.3';
-                        setTimeout(() => {
-                            heroImg.src = window.currentModalImages[window.currentModalImgIdx];
-                            heroImg.style.opacity = '1';
-                        }, 150);
-                    }
+                const track = document.getElementById('modal-image-track');
+                if (track) {
+                    const width = track.clientWidth;
+                    track.scrollTo({ left: idx * width, behavior: 'smooth' });
                 }
             };
 
@@ -4065,35 +4062,40 @@
                 }
             };
 
-            // Mobile Image Swiping Logic (Directly bound to the image container for maximum responsiveness)
-            const modalImageContainer = document.getElementById('modal-image-container');
-            if (modalImageContainer) {
-                let touchStartX = 0;
-                let touchStartY = 0;
-                
-                modalImageContainer.addEventListener('touchstart', function(e) {
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                }, { passive: true });
+            // Desktop Mouse Drag for Modal Image Track
+            const modalTrack = document.getElementById('modal-image-track');
+            if (modalTrack) {
+                let isModalDown = false;
+                let modalStartX;
+                let modalScrollLeft;
 
-                modalImageContainer.addEventListener('touchend', function(e) {
-                    if (!touchStartX || !touchStartY) return;
+                modalTrack.addEventListener('mousedown', (e) => {
+                    isModalDown = true;
+                    modalTrack.classList.remove('snap-x', 'snap-mandatory', 'scroll-smooth');
+                    modalTrack.classList.add('active', 'cursor-grabbing');
+                    modalStartX = e.pageX - modalTrack.offsetLeft;
+                    modalScrollLeft = modalTrack.scrollLeft;
+                });
+                const stopModalDrag = () => {
+                    if (!isModalDown) return;
+                    isModalDown = false;
+                    modalTrack.classList.remove('active', 'cursor-grabbing');
+                    modalTrack.classList.add('snap-x', 'snap-mandatory', 'scroll-smooth');
                     
-                    const touchEndX = e.changedTouches[0].clientX;
-                    const touchEndY = e.changedTouches[0].clientY;
-                    
-                    const diffX = touchStartX - touchEndX;
-                    const diffY = Math.abs(touchStartY - touchEndY);
-                    
-                    // Horizontal swipe threshold (Require horizontal swipe while keeping vertical movement small)
-                    if (Math.abs(diffX) > 40 && diffY < 50) {
-                        window.slideModalImage(diffX > 0 ? 1 : -1);
-                    }
-                    
-                    // Reset
-                    touchStartX = 0;
-                    touchStartY = 0;
-                }, { passive: true });
+                    // Snap to closest image after drag
+                    const width = modalTrack.clientWidth;
+                    const closestIndex = Math.round(modalTrack.scrollLeft / width);
+                    modalTrack.scrollTo({ left: closestIndex * width, behavior: 'smooth' });
+                };
+                modalTrack.addEventListener('mouseleave', stopModalDrag);
+                modalTrack.addEventListener('mouseup', stopModalDrag);
+                modalTrack.addEventListener('mousemove', (e) => {
+                    if (!isModalDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - modalTrack.offsetLeft;
+                    const walk = (x - modalStartX) * 1.5;
+                    modalTrack.scrollLeft = modalScrollLeft - walk;
+                });
             }
 
             // 1. Sticky Header
@@ -4588,7 +4590,7 @@
             const closeDetailsBtn = document.getElementById('close-details-btn');
             
             // Modal Elements to Update Dynamically
-            const modalHeroImg = document.getElementById('modal-hero-img');
+            const modalHeroImg0 = document.getElementById('modal-hero-img-0');
             const modalGalImg1 = document.getElementById('modal-gal-img-1');
             const modalGalImg2 = document.getElementById('modal-gal-img-2');
             const modalGalImg3 = document.getElementById('modal-gal-img-3');
@@ -4621,9 +4623,14 @@
                     // Extract property data from the clicked card
                     const card = btn.closest('.group');
                     if (card) {
-                        // 1. Update Image
+                        // 1. Update Images
                         const imgEl = card.querySelector('img');
-                        if (imgEl && modalHeroImg) modalHeroImg.src = imgEl.src;
+                        const img0 = document.getElementById('modal-hero-img-0');
+                        const img1 = document.getElementById('modal-hero-img-1');
+                        const img2 = document.getElementById('modal-hero-img-2');
+                        const img3 = document.getElementById('modal-hero-img-3');
+                        
+                        if (imgEl && img0) img0.src = imgEl.src;
 
                         // 2. Update Title
                         const titleEl = card.querySelector('h3');
@@ -4675,18 +4682,27 @@
                         // 6. Generate 3 unique gallery images consistently based on title text
                         if (modalGalImg1 && modalGalImg2 && modalGalImg3) {
                             const hash = titleText.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-                            const img1 = galleryPool[(hash) % galleryPool.length];
-                            const img2 = galleryPool[(hash + 3) % galleryPool.length];
-                            const img3 = galleryPool[(hash + 6) % galleryPool.length];
+                            const gen1 = galleryPool[(hash) % galleryPool.length];
+                            const gen2 = galleryPool[(hash + 3) % galleryPool.length];
+                            const gen3 = galleryPool[(hash + 6) % galleryPool.length];
                             
-                            modalGalImg1.src = img1;
-                            modalGalImg2.src = img2;
-                            modalGalImg3.src = img3;
+                            modalGalImg1.src = gen1;
+                            modalGalImg2.src = gen2;
+                            modalGalImg3.src = gen3;
 
-                            // Set up the gallery for sliding
-                            if (imgEl) {
-                                window.currentModalImages = [imgEl.src, img1, img2, img3];
-                                window.currentModalImgIdx = 0;
+                            // Set up the gallery track images
+                            if (img1 && img2 && img3) {
+                                img1.src = gen1; img1.classList.remove('hidden');
+                                img2.src = gen2; img2.classList.remove('hidden');
+                                img3.src = gen3; img3.classList.remove('hidden');
+                            }
+                            
+                            // Reset scroll track position instantly
+                            const track = document.getElementById('modal-image-track');
+                            if (track) {
+                                track.classList.remove('scroll-smooth');
+                                track.scrollTo({ left: 0, behavior: 'instant' });
+                                setTimeout(() => track.classList.add('scroll-smooth'), 50);
                             }
                         }
                     }
