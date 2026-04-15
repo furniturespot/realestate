@@ -928,9 +928,16 @@
                 <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-6 md:mt-8 z-10">
                     <button data-filter="all" class="filter-btn bg-primary text-white px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-transform hover:scale-105">All</button>
                     <button data-filter="off-plan" class="filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Off-Plan</button>
+                    <button data-filter="apartments" class="filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Apartments</button>
                     <button data-filter="ready" class="filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Ready</button>
                     <button data-filter="villas" class="filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Villas</button>
+                    <button data-filter="townhouses" class="filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Townhouses</button>
                     <button data-filter="penthouses" class="filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Penthouses</button>
+                </div>
+
+                <!-- Empty State Message -->
+                <div id="dream-empty-state" class="hidden w-full text-center py-16 md:py-24 z-10">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#0B0B0B] dark:text-white">No <span id="dream-empty-text">townhouses</span> are found.</h3>
                 </div>
 
                 <!-- Properties Grid -->
@@ -1912,6 +1919,13 @@
                     <button data-modal-filter="ready" class="modal-filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Ready</button>
                     <button data-modal-filter="villas" class="modal-filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Villas</button>
                     <button data-modal-filter="penthouses" class="modal-filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Penthouses</button>
+                    <button data-modal-filter="townhouses" class="modal-filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Townhouses</button>
+                    <button data-modal-filter="apartments" class="modal-filter-btn bg-white text-[#444] px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-colors hover:bg-gray-50">Apartments</button>
+                </div>
+
+                <!-- Empty State Message for Modal -->
+                <div id="modal-dream-empty-state" class="hidden w-full text-center py-16 md:py-24 z-10">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-[#0B0B0B] dark:text-white">No <span id="modal-dream-empty-text">townhouses</span> are found.</h3>
                 </div>
 
                 <!-- TRENDING GRID (12 Properties) -->
@@ -4721,6 +4735,8 @@
 
             // 6.b Modal Filter Logic
             const modalFilterBtns = document.querySelectorAll('.modal-filter-btn');
+            const modalDreamEmptyState = document.getElementById('modal-dream-empty-state');
+            const modalDreamEmptyText = document.getElementById('modal-dream-empty-text');
             
             if (modalFilterBtns.length > 0 && gridDream) {
                 const modalCards = gridDream.querySelectorAll('.modal-property-card');
@@ -4735,19 +4751,35 @@
                         btn.className = "modal-filter-btn bg-primary text-white px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-transform hover:scale-105";
                         
                         const filterValue = btn.getAttribute('data-modal-filter');
+                        const filterName = btn.textContent.trim().toLowerCase();
+                        let visibleCount = 0;
                         
                         modalCards.forEach(card => {
                             if (filterValue === 'all') {
                                 card.style.display = 'flex';
+                                visibleCount++;
                             } else {
                                 const category = card.getAttribute('data-category');
                                 if (category && category.includes(filterValue)) {
                                     card.style.display = 'flex';
+                                    visibleCount++;
                                 } else {
                                     card.style.display = 'none';
                                 }
                             }
                         });
+
+                        // Show/Hide Empty State
+                        if (visibleCount === 0 && modalDreamEmptyState && modalDreamEmptyText) {
+                            modalDreamEmptyText.textContent = filterName;
+                            modalDreamEmptyState.classList.remove('hidden');
+                            gridDream.classList.add('hidden');
+                            gridDream.classList.remove('grid');
+                        } else if (modalDreamEmptyState) {
+                            modalDreamEmptyState.classList.add('hidden');
+                            gridDream.classList.remove('hidden');
+                            gridDream.classList.add('grid');
+                        }
                     });
                 });
             }
@@ -4814,6 +4846,8 @@
             // 7. Filter Logic for "Find Your Dream Place"
             const filterBtns = document.querySelectorAll('.filter-btn');
             const dreamGrid = document.getElementById('dream-place-grid');
+            const dreamEmptyState = document.getElementById('dream-empty-state');
+            const dreamEmptyText = document.getElementById('dream-empty-text');
             
             if (filterBtns.length > 0 && dreamGrid) {
                 const propertyCards = dreamGrid.querySelectorAll('.property-card');
@@ -4828,19 +4862,35 @@
                         btn.className = "filter-btn bg-primary text-white px-5 md:px-6 py-2 rounded-full text-[12px] md:text-[13px] font-bold shadow-sm transition-transform hover:scale-105";
                         
                         const filterValue = btn.getAttribute('data-filter');
+                        const filterName = btn.textContent.trim().toLowerCase();
+                        let visibleCount = 0;
                         
                         propertyCards.forEach(card => {
                             if (filterValue === 'all') {
                                 card.style.display = 'flex';
+                                visibleCount++;
                             } else {
                                 const category = card.getAttribute('data-category');
                                 if (category && category.includes(filterValue)) {
                                     card.style.display = 'flex';
+                                    visibleCount++;
                                 } else {
                                     card.style.display = 'none';
                                 }
                             }
                         });
+
+                        // Show/Hide Empty State
+                        if (visibleCount === 0 && dreamEmptyState && dreamEmptyText) {
+                            dreamEmptyText.textContent = filterName;
+                            dreamEmptyState.classList.remove('hidden');
+                            dreamGrid.classList.add('hidden');
+                            dreamGrid.classList.remove('grid');
+                        } else if (dreamEmptyState) {
+                            dreamEmptyState.classList.add('hidden');
+                            dreamGrid.classList.remove('hidden');
+                            dreamGrid.classList.add('grid');
+                        }
                     });
                 });
             }
