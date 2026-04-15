@@ -153,8 +153,17 @@
         .dark-mode .border-gray-200 { border-color: #3F3F46 !important; }
         .dark-mode .border-gray-300, .dark-mode .border-\[\#E8E8E8\] { border-color: #52525B !important; }
         .dark-mode .bg-\[\#FAFAFA\] { background-color: #1F2937 !important; border-color: #374151 !important; color: #FFFFFF !important; }
+        
+        /* Hide review box tail in dark mode */
+        .dark-mode .bg-\[\#FAFAFA\] .absolute.-bottom-\[20px\] { display: none !important; }
+
         .dark-mode #sticky-header, .dark-mode .bg-white\/95 { background-color: rgba(24, 24, 27, 0.95) !important; }
         .dark-mode #view-all-modal, .dark-mode #property-details-modal, .dark-mode #article-details-modal, .dark-mode #text-modal { background-color: #121212 !important; }
+        
+        /* Transparent cutouts ONLY for property cards inside the View All Modal in dark mode */
+        .dark-mode #view-all-modal .bg-beigeBg,
+        .dark-mode #view-all-modal .bg-dreamBg,
+        .dark-mode #view-all-modal .bg-trendingBg { background-color: #121212 !important; }
         
         .dark-mode .hero-book-wrapper { background-color: #121212 !important; }
         .dark-mode .cutout-top-right-left-curve { background: radial-gradient(circle at bottom left, transparent 2.5rem, #121212 2.5rem) !important; }
